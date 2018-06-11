@@ -161,7 +161,7 @@ public class View extends JFrame implements ActionListener{
 		setResizable(false);
 	}
 
-
+//
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		/*If the user used comma, replace with point*/

@@ -18,7 +18,7 @@ import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-
+//
 public class Logic {
 	
 	/*Calculates and returns the price each person have to pay, based on given arguments*/

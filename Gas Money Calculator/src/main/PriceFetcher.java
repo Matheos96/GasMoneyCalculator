@@ -60,6 +60,7 @@ public class PriceFetcher {
 		return line;
 		
 	}
+	//
 	
 	/*Takes the interesting line and takes the info from that line and sets the instance variables for the current average fuel prices*/
 	private void setPrices(String line) {
