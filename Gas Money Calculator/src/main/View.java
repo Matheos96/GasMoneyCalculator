@@ -44,9 +44,9 @@ public class View extends JFrame implements ActionListener{
 	private GridBagConstraints constraints;
 	private PriceFetcher pf;
 	private JLabel feedbackLabel;
-	private JTextField persons, fuelCon, tripLength;
+	private JTextField persons, fuelCon, tripLength, userFuelPrice;
 	private ButtonGroup bGroup;
-	private JRadioButton gasE10Radio, gas98ERadio, dieselRadio;
+	private JRadioButton gasE10Radio, gas98ERadio, dieselRadio, customPrice;
 	 
 	
 	public View(PriceFetcher p) {
@@ -64,7 +64,7 @@ public class View extends JFrame implements ActionListener{
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
 		constraints.insets = new Insets(5,5,5,5);
-		constraints.anchor = GridBagConstraints.EAST;
+		constraints.anchor = GridBagConstraints.WEST;
 		
 		/*Fuel Consumption JComponents*/
 		panel.add(new JLabel("Fuel Consumption (l/100km): "), constraints);
@@ -84,7 +84,7 @@ public class View extends JFrame implements ActionListener{
 		constraints.gridx = 1;
 		panel.add(new JLabel("Split between (persons): "), constraints);
 		constraints.gridx = 2;
-		persons = new JTextField(2);
+		persons = new JTextField(5);
 		panel.add(persons, constraints);
 		
 		/*Fuel Type JComponents*/
@@ -105,6 +105,17 @@ public class View extends JFrame implements ActionListener{
 		dieselRadio = new JRadioButton("Diesel");
 		bGroup.add(dieselRadio);
 		panel.add(dieselRadio, constraints);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 3;
+		customPrice = new JRadioButton("Manually set fuel price (€/l): ");
+		bGroup.add(customPrice);
+		panel.add(customPrice, constraints);
+		
+		constraints.gridx = 2;
+		constraints.gridy = 3;
+		userFuelPrice = new JTextField(5);
+		panel.add(userFuelPrice, constraints);
 		
 		/*Initializing a new JPanel for the info text in the middle*/
 		this.infoPanel = new JPanel();
@@ -139,7 +150,7 @@ public class View extends JFrame implements ActionListener{
 		
 		
 		
-		setSize(650, 180);
+		setSize(650, 240);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Gas Money Calculator");
@@ -166,8 +177,17 @@ public class View extends JFrame implements ActionListener{
 			lengthDouble  = Double.parseDouble(length);
 			personsInt = Integer.parseInt(noPersons);
 			avgPrice = pf.getAvgPrice(Logic.getSelected(bGroup));
+			System.out.println(userFuelPrice.getText().length());
+			if (avgPrice == -1.0 && userFuelPrice.getText().length()>0)
+				avgPrice = Double.parseDouble(userFuelPrice.getText().trim().replace(",", "."));
+			else if (avgPrice == -1.0 && userFuelPrice.getText().length()==0)
+				feedbackLabel.setText("You have chosen to manually set the fuel price. Please give the price in the corresponding box.");
+			else if (avgPrice == -2.0)
+				feedbackLabel.setText("Please choose a fuel type!");
 			answer = Logic.calculatePrice(avgPrice, personsInt, fuelDouble, lengthDouble);
-			feedbackLabel.setText("You will have to pay "+Math.round(answer*100.0)/100.0+"€ each :)");
+			if (answer>=0)
+				feedbackLabel.setText("You will have to pay "+Math.round(answer*100.0)/100.0+"€ each :)");
+
 			
 		}
 		catch (NumberFormatException e) {

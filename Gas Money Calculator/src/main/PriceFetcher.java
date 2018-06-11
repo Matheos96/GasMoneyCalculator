@@ -76,7 +76,11 @@ public class PriceFetcher {
 			return Gas98E;
 		else if (fuel.equals("95E10")) 
 			return GasE10;
-		return Diesel;
+		else if (fuel.equals("Diesel"))
+			return Diesel;
+		else if (fuel.startsWith("Manually"))
+			return -1.0;
+		return -2.0;
 	}
 
 }
