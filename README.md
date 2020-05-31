@@ -1,2 +1,4 @@
 # GasMoneyCalculator
-A simple java application that will help you when planning a trip and tell you how much each person will have to pay in gas money :)
+
+A simple JavaFX application to help you calculate how much each of your friends has to
+pay you in gas money after your road trip :)

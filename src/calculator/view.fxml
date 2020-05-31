@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" spacing="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.Controller">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <HBox spacing="10">
+        <VBox alignment="TOP_CENTER" spacing="10">
+            <HBox alignment="CENTER_RIGHT">
+                <Label text="Fuel Consumption (l/100km): " />
+                <TextField fx:id="consumptionValue" prefWidth="100" />
+            </HBox>
+            <HBox alignment="CENTER_RIGHT">
+                <Label text="Split between (persons): " />
+                <TextField fx:id="personsValue" prefWidth="100" />
+            </HBox>
+            <HBox alignment="CENTER_RIGHT">
+                <Label text="Distance (km): " />
+                <TextField fx:id="distanceValue" prefWidth="100" />
+            </HBox>
+
+        </VBox>
+
+        <VBox alignment="TOP_CENTER" spacing="10">
+            <HBox alignment="CENTER_RIGHT" spacing="5">
+                <RadioButton fx:id="manualPriceRadio" />
+                <Label text="Manually set fuel price (€/l): " />
+                <TextField fx:id="fuelPriceValue" prefWidth="100" />
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="5">
+                <RadioButton fx:id="autoPriceRadio" />
+                <Label text="Automatically set fuel price: " />
+                <ComboBox fx:id="fuelTypeCombo" prefWidth="100" />
+            </HBox>
+        </VBox>
+
+    </HBox>
+
+    <Label text="The automatic fuel prices are yesterday's averages from Polttoaine.net">
+      <font>
+         <Font name="System Italic" size="12.0" />
+      </font></Label>
+
+    <Button fx:id="calcBtn" defaultButton="true" onAction="#handleCalculateBtn" text="Calculate">
+      <font>
+         <Font size="16.0" />
+      </font></Button>
+
+    <Label fx:id="feedbackLabel" text="Click 'Calculate' to calculate how much each person has to pay.">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Label>
+
+    <Label text="Copyright © 2020 Matheos Mattsson" />
+</VBox>
